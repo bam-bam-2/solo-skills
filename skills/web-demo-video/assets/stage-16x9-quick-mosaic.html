@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>stage</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#000; font-family:-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; }
+  #stage {
+    width:960px; height:540px; position:relative; overflow:hidden;
+    background: radial-gradient(120% 90% at 50% 0%, #24333d 0%, #141414 55%, #0d0d0d 100%);
+  }
+  #cap {
+    position:absolute; left:0; right:0; top:34px; text-align:center;
+    color:#fff; font-size:30px; font-weight:800; letter-spacing:-0.03em; line-height:1.3;
+    padding:0 30px; text-shadow:0 2px 14px rgba(0,0,0,.55);
+  }
+  #cap .hl { color:#00d4ff; }
+  #win {
+    position:absolute; left:198px; top:112px; width:564px; height:372px;
+    border-radius:12px; overflow:hidden; background:#1e1e1e;
+    border:1px solid #3a3a3a; box-shadow:0 18px 50px rgba(0,0,0,.65);
+  }
+  #bar { height:22px; background:#2a2a2a; display:flex; align-items:center; padding:0 8px; gap:5px; border-bottom:1px solid #3a3a3a; }
+  .dot { width:7px; height:7px; border-radius:50%; }
+  #urlpill { flex:1; text-align:center; font-size:9px; color:#8b8b8b; }
+  #view { position:relative; width:564px; height:350px; overflow:hidden; }
+  #fr { width:1128px; height:700px; border:0; transform:scale(.5); transform-origin:0 0; }
+  #cursor {
+    position:absolute; width:17px; height:23px; left:-99px; top:-99px; pointer-events:none; z-index:20;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.8));
+  }
+  #ring {
+    position:absolute; border:2px solid #00d4ff; border-radius:50%; left:-99px; top:-99px;
+    width:0; height:0; pointer-events:none; z-index:19; opacity:0;
+  }
+  #foot {
+    position:absolute; left:0; right:0; bottom:26px; text-align:center;
+    color:#c9dde5; font-size:18px; font-weight:700;
+  }
+  #foot span { color:#00d4ff; }
+
+  #stats { position:absolute; inset:0; opacity:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; padding:0 70px; }
+  #stTag { color:#8fa8b2; font-size:19px; font-weight:700; letter-spacing:0.4px; }
+  #stBig { margin-top:8px; display:flex; align-items:baseline; gap:10px; }
+  #stBig em { font-style:normal; color:#fff; font-size:104px; font-weight:900; letter-spacing:-4px; line-height:1; }
+  #stBig span { color:#00d4ff; font-size:40px; font-weight:800; }
+  #stSub { margin-top:12px; color:#7f9199; font-size:17px; font-weight:600; }
+  #stRows { margin-top:26px; display:flex; gap:10px; }
+  .strow { background:#232f35; border:1px solid #33454e; border-radius:8px; padding:12px 18px;
+    display:flex; flex-direction:column; align-items:center; gap:5px; min-width:118px; }
+  .strow i { font-style:normal; color:#93a8b1; font-size:14px; font-weight:700; }
+  .strow b { color:#e9f6fa; font-size:26px; font-weight:800; }
+  .strow.hi { background:#16323c; border-color:#00d4ff; }
+  .strow.hi b { color:#00d4ff; }
+  #stNote { margin-top:26px; color:#cfe6ee; font-size:19px; font-weight:700; }
+  #end { position:absolute; inset:0; opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  #endTitle { color:#fff; font-size:58px; font-weight:900; letter-spacing:-0.04em; }
+  #endTag { color:#9fb4bd; font-size:19px; font-weight:600; margin-top:10px; }
+  #endList { margin-top:30px; display:flex; flex-direction:column; gap:10px; text-align:center; }
+  #endList div { color:#e6f6fb; font-size:20px; font-weight:700; }
+  #endList b { color:#00d4ff; }
+  #endUrl {
+    margin-top:34px; color:#0a2530; background:#00d4ff; font-size:21px; font-weight:800;
+    padding:11px 22px; border-radius:999px;
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="cap"></div>
+  <div id="win">
+    <div id="bar">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#febc2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+      <div id="urlpill">quick-mosaic.vercel.app</div>
+    </div>
+    <div id="view">
+      <iframe id="fr" src="/index.html"></iframe>
+      <div id="ring"></div>
+      <svg id="cursor" viewBox="0 0 16 22"><path d="M1 1 L1 17 L5.2 13.2 L7.8 19.6 L10.6 18.4 L8 12.2 L13.4 12 Z" fill="#fff" stroke="#111" stroke-width="1.1" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div id="foot"></div>
+  <div id="stats">
+    <div id="stTag">만든 지 열흘, 첫 기록</div>
+    <div id="stBig"><em>65</em><span>명</span></div>
+    <div id="stSub">2026. 8. 7 — 8. 16 · 신규 사용자 · Google Analytics 4</div>
+    <div id="stRows">
+      <div class="strow"><i>Direct</i><b>43</b></div>
+      <div class="strow"><i>Referral</i><b>12</b></div>
+      <div class="strow"><i>Unassigned</i><b>5</b></div>
+      <div class="strow hi"><i>Organic Search</i><b>3</b></div>
+      <div class="strow hi"><i>Organic Social</i><b>2</b></div>
+    </div>
+    <div id="stNote">검색 3명과 소셜 2명은 제가 올린 적 없는 채널에서 들어왔습니다</div>
+  </div>
+  <div id="end">
+    <div id="endTitle">모자이크</div>
+    <div id="endTag">드래그만 하면 끝나는 무료 모자이크·블러 도구</div>
+    <div id="endList">
+      <div><b>설치·회원가입 없음</b></div>
+      <div>이미지는 <b>서버로 안 올라갑니다</b></div>
+      <div><b>맥·윈도우·아이폰</b> 어디서나</div>
+    </div>
+    <div id="endUrl">quick-mosaic.vercel.app</div>
+  </div>
+</div>
+
+<script>
+const FPS = 15;
+const SCALE = 0.5;
+const capEl = document.getElementById('cap');
+const footEl = document.getElementById('foot');
+const winEl = document.getElementById('win');
+const endEl = document.getElementById('end');
+const statsEl = document.getElementById('stats');
+const curEl = document.getElementById('cursor');
+const ringEl = document.getElementById('ring');
+const fr = document.getElementById('fr');
+let W = null, D = null;
+let ready = false;
+const done = new Set();
+function once(key, fn) { if (done.has(key)) return; done.add(key); fn(); }
+
+const IMG_W = 980, IMG_H = 540;
+const RECTS = {};
+
+function makeChatImage() {
+  const c = document.createElement('canvas');
+  c.width = IMG_W; c.height = IMG_H;
+  const x = c.getContext('2d');
+  x.fillStyle = '#b2c7d9'; x.fillRect(0, 0, IMG_W, IMG_H);
+  x.fillStyle = '#a9bfd0'; x.fillRect(0, 0, IMG_W, 54);
+
+  function avatar(cx, cy, r) {
+    x.save(); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.clip();
+    const g = x.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+    g.addColorStop(0, '#ffb36b'); g.addColorStop(1, '#ff7a7a');
+    x.fillStyle = g; x.fillRect(cx - r, cy - r, r * 2, r * 2);
+    x.fillStyle = '#fff';
+    x.beginPath(); x.arc(cx, cy - r * 0.25, r * 0.38, 0, 7); x.fill();
+    x.beginPath(); x.arc(cx, cy + r * 0.95, r * 0.75, 0, 7); x.fill();
+    x.restore();
+    return { x: cx - r, y: cy - r, w: r * 2, h: r * 2 };
+  }
+  function bubble(text, y, mine, big) {
+    x.font = (big ? 'bold ' : '') + '23px -apple-system, sans-serif';
+    const w = x.measureText(text).width + 36;
+    const h = 48;
+    const bx = mine ? IMG_W - 26 - w : 84;
+    x.fillStyle = mine ? '#fef01b' : '#ffffff';
+    x.beginPath();
+    if (x.roundRect) x.roundRect(bx, y, w, h, 13); else x.rect(bx, y, w, h);
+    x.fill();
+    x.fillStyle = '#1a1a1a';
+    x.fillText(text, bx + 18, y + 32);
+    return { x: bx, y: y, w: w, h: h };
+  }
+
+  RECTS.headAvatar = avatar(42, 27, 16);
+  x.fillStyle = '#1a2b38'; x.font = 'bold 23px -apple-system, sans-serif';
+  x.fillText('김민서', 70, 35);
+
+  RECTS.avatar1 = avatar(50, 100, 23);
+  x.fillStyle = '#33475a'; x.font = '15px -apple-system, sans-serif';
+  x.fillText('김민서', 84, 86);
+  bubble('언니 그거 계좌 어디로 보내면 돼요?', 94, false);
+  RECTS.account = bubble('국민 123456-01-234567 김민서', 162, true, true);
+  bubble('아 그리고 제 번호 바뀌었어요', 230, true);
+  RECTS.phone = bubble('010-0000-0000 로 저장해주세요', 298, true, true);
+  RECTS.avatar2 = avatar(50, 392, 23);
+  RECTS.addr = bubble('넵 서울시 마포구 월드컵로 12 로 보낼게요', 366, false);
+  bubble('감사합니다!', 434, false);
+  return c.toDataURL();
+}
+
+function setCursor(p, visible) {
+  if (!visible || !p) { curEl.style.left = '-99px'; curEl.style.top = '-99px'; return; }
+  curEl.style.left = (p.x * SCALE - 1) + 'px';
+  curEl.style.top = (p.y * SCALE - 1) + 'px';
+}
+function setRing(p, sizeIframePx, alpha) {
+  if (!alpha || !p) { ringEl.style.opacity = 0; return; }
+  const d = sizeIframePx * SCALE;
+  ringEl.style.width = d + 'px'; ringEl.style.height = d + 'px';
+  ringEl.style.left = (p.x * SCALE - d / 2) + 'px';
+  ringEl.style.top = (p.y * SCALE - d / 2) + 'px';
+  ringEl.style.opacity = alpha;
+}
+function fire(type, p) {
+  const cv = D.getElementById('cv');
+  const ev = new W.MouseEvent(type, { bubbles: true, cancelable: true, clientX: p.x, clientY: p.y });
+  (type === 'mousedown' ? cv : W).dispatchEvent(ev);
+}
+function canvasPoint(u, v) {
+  const r = D.getElementById('cv').getBoundingClientRect();
+  return { x: r.left + r.width * u, y: r.top + r.height * v };
+}
+function onRect(name, ux, uy) {
+  const r = RECTS[name];
+  return canvasPoint((r.x + r.w * ux) / IMG_W, (r.y + r.h * uy) / IMG_H);
+}
+function lerpPt(a, b, p) { return { x: a.x + (b.x - a.x) * p, y: a.y + (b.y - a.y) * p }; }
+function clickShape(n) { D.querySelector('#shapeToggle [data-shape="' + n + '"]').click(); }
+function clickMode(n) { D.querySelector('#modeToggle [data-mode="' + n + '"]').click(); }
+function setSlider(id, v) {
+  const i = D.getElementById(id); i.value = v;
+  i.dispatchEvent(new W.Event('input', { bubbles: true }));
+}
+
+function seg(t, a, b) { return Math.max(0, Math.min(1, (t - a) / (b - a))); }
+function ease(p) { return p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
+
+// 드래그 한 구간. ptFn(진행률 0~1) -> 아이프레임 좌표
+function drag(t, a, b, ptFn) {
+  const k = 'd' + a;
+  if (t < a) return null;
+  if (t > b) { once(k + 'u', function () { fire('mouseup', ptFn(1)); }); return null; }
+  const pt = ptFn(ease(seg(t, a, b)));
+  once(k + 'd', function () { fire('mousedown', ptFn(0)); });
+  fire('mousemove', pt);
+  return pt;
+}
+
+const CAPTIONS = [
+  [0.3, 3.3, '카톡 캡처, <span class="hl">그냥 올리면</span> 큰일 나죠'],
+  [3.5, 7.4, '가릴 데를 <span class="hl">드래그</span>하면 끝'],
+  [7.6, 11.5, '<span class="hl">펜</span>으로 슥슥 칠해도 되고'],
+  [11.7, 15.3, '얼굴은 <span class="hl">블러 + 원형</span>으로'],
+  [15.5, 18.5, '저장하거나 <span class="hl">바로 복사</span>'],
+];
+const FOOTS = [
+  [0.3, 3.3, '설치도 회원가입도 <span>없이</span>'],
+  [3.5, 7.4, '모자이크 · 블러 / 사각형 · 원 · 타원 · 펜'],
+  [7.6, 11.5, '펜 굵기도 슬라이더로 조절'],
+  [11.7, 15.3, '이미지는 <span>서버로 안 올라갑니다</span>'],
+  [15.5, 18.5, '<span>quick-mosaic.vercel.app</span>'],
+];
+function pickText(list, t, el) {
+  let cur = null;
+  for (const item of list) if (t >= item[0] && t <= item[1]) cur = item;
+  if (!cur) { el.style.opacity = 0; return; }
+  if (el.dataset.cur !== cur[2]) { el.innerHTML = cur[2]; el.dataset.cur = cur[2]; }
+  el.style.opacity = Math.min(seg(t, cur[0], cur[0] + 0.3), 1 - seg(t, cur[1] - 0.3, cur[1]));
+}
+
+window.__tick = function (frame) {
+  const t = frame / FPS;
+  if (!ready) return 'not-ready';
+  pickText(CAPTIONS, t, capEl);
+  pickText(FOOTS, t, footEl);
+
+  once('load', function () {
+    const im = new W.Image();
+    im.onload = function () { W.loadImageToCanvas(im); };
+    im.src = makeChatImage();
+  });
+  if (!RECTS.account) return 'wait';
+
+  let cur = null, ringP = null, ringSize = 0, ringA = 0;
+
+  if (t >= 3.4 && t < 5.1) {
+    const s = onRect('account', -0.03, -0.12), e = onRect('account', 1.03, 1.12);
+    cur = drag(t, 3.9, 4.8, function (p) { return lerpPt(s, e, p); }) || (t < 3.9 ? s : e);
+  } else if (t >= 5.1 && t < 7.5) {
+    const s = onRect('phone', -0.03, -0.12), e = onRect('phone', 1.03, 1.12);
+    cur = drag(t, 5.5, 6.4, function (p) { return lerpPt(s, e, p); }) || (t < 5.5 ? s : e);
+  } else if (t >= 7.5 && t < 11.6) {
+    once('brush', function () { clickShape('brush'); setSlider('brushSize', 40); });
+    const s = onRect('addr', 0.03, 0.5), e = onRect('addr', 0.97, 0.5);
+    cur = drag(t, 8.4, 10.6, function (p) {
+      const q = lerpPt(s, e, p);
+      return { x: q.x, y: q.y + Math.sin(p * 11) * 6 };
+    }) || (t < 8.4 ? s : e);
+    ringP = cur; ringSize = 40; ringA = (t >= 8.1 && t <= 10.9) ? 1 : 0;
+  } else if (t >= 11.6 && t < 15.4) {
+    once('circleblur', function () { clickShape('circle'); clickMode('blur'); setSlider('blockSize', 12); });
+    const s1 = onRect('avatar1', 0.5, -0.15), e1 = onRect('avatar1', 0.5, 1.15);
+    const s2 = onRect('avatar2', 0.5, -0.15), e2 = onRect('avatar2', 0.5, 1.15);
+    if (t < 13.9) {
+      cur = drag(t, 12.4, 13.3, function (p) { return lerpPt(s1, e1, p); }) || (t < 12.4 ? s1 : e1);
+    } else {
+      cur = drag(t, 14.1, 14.9, function (p) { return lerpPt(s2, e2, p); }) || (t < 14.1 ? s2 : e2);
+    }
+  } else if (t >= 15.4 && t < 18.6) {
+    const b = D.getElementById('btnCopy').getBoundingClientRect();
+    const target = { x: b.left + b.width / 2, y: b.top + b.height / 2 };
+    cur = lerpPt(canvasPoint(0.5, 0.55), target, ease(seg(t, 15.5, 16.4)));
+    if (t >= 16.5 && t <= 17.5) {
+      once('copy', function () { D.getElementById('btnCopy').click(); });
+      ringP = target;
+      ringSize = 90 + (t - 16.5) * 140;
+      ringA = Math.max(0, 1 - (t - 16.5) / 1.0);
+    }
+  }
+
+  setCursor(cur, !!cur && t < 18.6);
+  setRing(ringP, ringSize, ringA);
+
+  // 데모 창 -> 성과 카드 -> 엔딩 카드
+  var winOut = seg(t, 18.8, 19.6);          // 창 사라짐
+  var statsIn = seg(t, 19.4, 20.2);         // 성과 카드 등장
+  var statsOut = seg(t, 29.6, 30.4);        // 성과 카드 퇴장
+  var endIn = seg(t, 30.2, 31.0);           // 엔딩 등장
+
+  winEl.style.opacity = 1 - winOut;
+  winEl.style.transform = 'scale(' + (1 - winOut * 0.05) + ')';
+
+  statsEl.style.opacity = Math.min(statsIn, 1 - statsOut);
+  var sy = (1 - statsIn) * 14;
+  statsEl.style.transform = 'translateY(' + sy + 'px)';
+
+  endEl.style.opacity = endIn;
+
+  if (t >= 18.9) { capEl.style.opacity = 0; footEl.style.opacity = 0; }
+  return 'ok';
+};
+
+fr.addEventListener('load', function () {
+  W = fr.contentWindow; D = fr.contentDocument;
+  const st = D.createElement('style');
+  st.textContent = '#topbar,#seoContent,#footer,#adInCanvas,#status,#toast{display:none !important;}' +
+    '#toolbar{margin-top:0 !important;}#canvasWrap{background:#181818;}';
+  D.head.appendChild(st);
+  ready = true;
+});
+window.__isReady = function () { return ready; };
+</script>
+</body>
+</html>
