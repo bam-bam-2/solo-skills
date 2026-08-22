@@ -25,7 +25,7 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 ## 이 키트를 쓰면 어디까지 가나
 
-저는 지금 **자동화 49개**를 맥미니 한 대에서 돌리고 있습니다. 직원은 없습니다.
+직원 없이 **49개를 자동화했습니다.** 맥미니 한 대에서 전부 자동으로 실행됩니다.
 
 ```
 07:10  스레드 일일 발행
@@ -187,7 +187,7 @@ SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16
 ### 💻 remote-offload — 무거운 작업 다른 머신에 넘기기
 [`remote-offload`](skills/remote-offload/)
 
-저사양 노트북에서 에이전트를 돌리면 메모리가 계속 부족합니다. 스크래핑·인코딩·빌드·대량 API 수집은 SSH로 보조 머신에 던지는 패턴.
+저사양 노트북에서 에이전트를 실행하면 메모리가 계속 부족합니다. 스크래핑·인코딩·빌드·대량 API 수집은 SSH로 보조 머신에 던지는 패턴.
 
 ### 🔁 claude-codex-fallback — 한도 걸리면 다른 CLI로
 [`claude-codex-fallback`](skills/claude-codex-fallback/)
