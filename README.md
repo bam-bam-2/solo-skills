@@ -2,59 +2,125 @@
 
 **혼자 다 하는 사람을 위한 AI 에이전트 스킬 모음**
 
-디자이너도 개발자도 마케터도 없이 혼자 일하면, 하루가 잡일로 다 갑니다.
+커뮤니티를 6기까지 운영하면서, 제 시간의 절반이 잡일이었습니다.
 제품 소개 영상 만들기, 전자책 PDF 뽑기, 블로그 글쓰기, 회의록 정리, 고객 카톡, 댓글 답글.
 
-이 저장소는 커뮤니티를 6기까지 운영하면서 **실제로 매일 쓰는 스킬**을 정리한 것입니다.
-개발자용 스킬 모음은 많은데, 혼자 사업하는 사람이 쓸 스킬은 잘 없어서 만들었습니다.
+디자이너도 개발자도 마케터도 없어서 전부 제가 했고, 지금은 전부 AI 에이전트에게 넘겼습니다.
+그 과정에서 만든 스킬 15개입니다.
 
 Claude Code, Codex, OpenCode 등 SKILL.md 규격을 읽는 에이전트에서 그대로 씁니다.
 
 ---
 
-## 어떤 걸 할 수 있나
+## 무엇을 자동화했나
 
-| 스킬 | 할 수 있는 일 | 준비물 |
-| --- | --- | --- |
-| [web-demo-video](skills/web-demo-video/) | 화면 녹화 없이 제품 데모 영상 만들기 (1:1 / 9:16 / 16:9) | ffmpeg |
-| [book-pdf](skills/book-pdf/) | 마크다운 원고 → 진짜 책 같은 PDF·EPUB 전자책 | Node |
-| [measured-ui-callouts](skills/measured-ui-callouts/) | 화면 캡처에 좌표 측정 기반 강조 박스 + 개인정보 모자이크 | 없음 |
-| [naver-blog-post](skills/naver-blog-post/) | 네이버 블로그 검색 유입용 정보성 글 작성 | 없음 |
-| [threads-reply](skills/threads-reply/) | 내 답글을 역산해 문체 기준표 만들고 댓글 답글 쓰기 | 없음 |
-| [meeting-minutes](skills/meeting-minutes/) | 전사록 → 회의록 → 노션 등록 → 디스코드 공지 | 노션 토큰 |
-| [kakaotalk-cli](skills/kakaotalk-cli/) | macOS 카카오톡 메시지 읽기·보내기 | macOS |
-| [naver-mail](skills/naver-mail/) | 브라우저 없이 네이버 메일 읽기 (IMAP) | 네이버 계정 |
-| [daangn-search](skills/daangn-search/) | 당근마켓을 구·시·전국 단위로 훑기 | 없음 |
-| [daily-brief-bot](skills/daily-brief-bot/) | 매일 아침 관심 주제 아티클 요약을 디스코드로 받기 | 디스코드 봇 |
-| [discord-agent-fleet](skills/discord-agent-fleet/) | 디스코드 상주 대화형 AI 봇 여러 개 만들고 운영하기 | 디스코드 봇 |
-| [discord-reminder](skills/discord-reminder/) | 리마인더를 cron에 걸고 디스코드 DM으로 받기 | 상시 구동 머신 |
-| [remote-offload](skills/remote-offload/) | 무거운 작업을 SSH로 보조 머신에 넘기기 | SSH |
-| [multi-method-image-generation](skills/multi-method-image-generation/) | 가용한 모든 경로로 이미지 만들어 비교하기 | 선택 |
-| [claude-codex-fallback](skills/claude-codex-fallback/) | 사용량 한도 걸리면 다른 CLI로 자동 재실행 | 선택 |
+### 🎬 화면 녹화 없이 제품 데모 영상 만들기
+[`web-demo-video`](skills/web-demo-video/)
+
+OBS도 화면 녹화도 안 씁니다. 실제 사이트를 iframe에 띄우고, **가짜 커서를 움직여 진짜 클릭 이벤트를 쏜 다음**, 프레임을 한 장씩 캡처해 ffmpeg로 붙입니다.
+
+맥 브라우저 창 목업(신호등 3개 + URL 바) 안에서 돌아가고, 클릭할 때 하이라이트 원이 퍼지고, 마지막엔 엔딩 카드가 붙습니다. 타임라인은 `__tick(프레임번호)` 하나로 결정되기 때문에 **몇 번을 다시 뽑아도 똑같은 영상**이 나옵니다.
+
+SNS 비율 3종(1:1 / 9:16 / 16:9) 대응.
+
+### 📖 마크다운 원고를 진짜 책처럼 만들기
+[`book-pdf`](skills/book-pdf/)
+
+Paged.js로 표지, 판권 페이지, **실제 쪽번호가 박힌 목차**, 장마다 바뀌는 러닝헤더까지 붙입니다. 문단이 어중간하게 잘려 다음 장으로 넘어가는 것도 막습니다.
+
+전자책 팔려고 만들었습니다. 워드로 씨름하지 않아도 됩니다.
+
+### 📝 회의 끝나면 회의록이 노션에 올라가 있기
+[`meeting-minutes`](skills/meeting-minutes/)
+
+전사록을 넣으면 회의록으로 정리해서 노션 DB에 등록하고 디스코드에 공지까지 합니다.
+
+여기엔 **사고 대응 절차**가 같이 들어 있습니다. 전사가 유실됐을 때 지어내지 않고, 회의록 상단에 "무엇을 근거로 썼는지"를 명시한 뒤 참석자에게 보완을 요청합니다. 실제로 회의 본론이 통째로 날아간 적이 있어서 넣었습니다.
+
+외부 mp3 녹취를 받았을 때는 고유명사를 프롬프트에 미리 넣어 전사 정확도를 올리고, 타임스탬프를 절대 시각으로 바꿔 대조하기 쉽게 만듭니다.
+
+### 💬 내 말투로 댓글 답글 쓰기
+[`threads-reply`](skills/threads-reply/)
+
+문체를 감으로 정하지 않습니다. **내가 쓴 답글을 대량으로 긁어서 역산합니다.**
+
+한 달치 한 줄 답글 492건을 실측했더니 느낌표 31% / 물음표 7.5%가 나왔고, 이전에 만들어둔 기준표(느낌표 11% / 물음표 22%)와 정반대였습니다. 그 낡은 표를 믿고 쓴 초안은 반려됐습니다. 그래서 **배치를 시작할 때마다 문체표를 다시 잰다**는 규칙이 들어 있습니다.
+
+댓글과 답글을 짝으로 봐야 하는 이유, 통계만 맞추면 왜 훈수형 문장이 나오는지도 실패 기록으로 적어뒀습니다.
+
+### 🖼 스크린샷에 강조 박스 정확히 얹기
+[`measured-ui-callouts`](skills/measured-ui-callouts/)
+
+강조 박스를 눈대중으로 그리지 않습니다. **대상 요소의 렌더링 좌표를 실제로 측정해서** 그 위치에 박스를 만듭니다.
+
+개인정보(실명·주소·전화·결제 정보) 모자이크 체크리스트와, 제목이 캔버스 밖으로 잘리지 않았는지 확인하는 최종 검수 항목이 붙어 있습니다.
+
+### ✍️ 네이버 블로그에서 검색으로 유입되는 글 쓰기
+[`naver-blog-post`](skills/naver-blog-post/)
+
+"완벽 가이드", "총정리", "꿀팁 Zip" 같은 제목은 금지입니다. 네이버가 낚시성 제목을 스팸으로 명시하고 있어서요.
+
+대신 상위 노출 중인 글들을 먼저 측정하고, 롱테일 키워드를 제목 앞쪽에 배치하고, 분량과 이미지 개수를 실측 기준에 맞춥니다.
+
+### 📱 맥에서 카카오톡 보내기
+[`kakaotalk-cli`](skills/kakaotalk-cli/)
+
+한글을 `keystroke`로 넣으면 `ㅁㅁㅁ`로 깨집니다. SSH로 들어가면 `pbcopy`가 GUI 페이스트보드에 안 붙습니다. 화면에 렌더링되지 않은 채팅방은 목록에서 못 찾습니다.
+
+**세 가지 다 막혀본 다음에 찾은 경로**가 적혀 있습니다. 단톡방 발송 전 나에게 먼저 연습 발송해 서식을 확인하는 절차, 그리고 AI가 대신 보낸 메시지에는 그렇다고 표시하는 규칙까지요.
+
+### 📬 브라우저 없이 네이버 메일 읽기
+[`naver-mail`](skills/naver-mail/)
+
+웹 세션이 만료돼 로그인 화면으로 튕길 때 IMAP으로 우회합니다. 본문과 대용량 첨부까지 그대로 받아옵니다.
+
+### 🥕 당근마켓을 구·시·전국 단위로 훑기
+[`daangn-search`](skills/daangn-search/)
+
+당근 웹 검색은 **동 하나로만** 됩니다. 그래서 넓게 찾으려면 지역코드를 순회해야 합니다. 대형가전이나 노트북처럼 한 동네에 매물이 없는 물건을 찾을 때 씁니다.
+
+### 🤖 매일 아침 관심 주제 브리핑 받기
+[`daily-brief-bot`](skills/daily-brief-bot/)
+
+정해진 시각에 아티클을 모아 요약해서 디스코드로 보냅니다. 톤·길이·발송 시각을 나중에 조정하는 방법까지 포함.
+
+### 🛠 디스코드 상주 봇 여러 개 운영하기
+[`discord-agent-fleet`](skills/discord-agent-fleet/)
+
+상시 구동 머신에서 대화형 봇을 여러 개 돌릴 때 밟는 함정을 정리했습니다. 절전 모드로 봇이 조용히 죽는 문제, 설정 파일이 자동 로딩되며 생기는 충돌, 사용량 한도 터졌을 때 대응까지.
+
+### ⏰ 리마인더를 cron에 걸고 디스코드 DM으로 받기
+[`discord-reminder`](skills/discord-reminder/)
+
+유료 자동화 서비스의 슬롯을 쓰지 않고, 상시 구동 머신의 launchd/cron으로 처리합니다.
+
+### 💻 무거운 작업을 다른 머신에 넘기기
+[`remote-offload`](skills/remote-offload/)
+
+저사양 노트북에서 에이전트를 돌리면 메모리가 계속 부족합니다. 스크래핑·인코딩·빌드·대량 API 수집은 SSH로 보조 머신에 던지는 패턴.
+
+### 🎨 이미지가 필요할 때 모든 경로 동시에 시도하기
+[`multi-method-image-generation`](skills/multi-method-image-generation/)
+
+이미지 생성 API, HTML·CSS 렌더링, 보유 사진, 기존 웹 자산을 전부 시도해서 나란히 놓고 고릅니다.
+
+### 🔁 사용량 한도 걸리면 다른 CLI로 재실행
+[`claude-codex-fallback`](skills/claude-codex-fallback/)
+
+자동화가 한도 때문에 멈추지 않게 하는 폴백.
 
 ---
 
 ## 설치
 
-저장소를 통째로 받아서 에이전트가 읽는 스킬 폴더에 넣습니다.
-
 ```bash
 git clone https://github.com/bam-bam-2/solo-skills.git
-```
-
-**Claude Code**
-```bash
 mkdir -p ~/.claude/skills
 cp -R solo-skills/skills/* ~/.claude/skills/
 ```
 
-**프로젝트 단위로만 쓰고 싶다면**
-```bash
-mkdir -p .claude/skills
-cp -R solo-skills/skills/* .claude/skills/
-```
-
-필요한 스킬만 골라서 복사해도 됩니다. 각 스킬은 서로 의존하지 않습니다.
+프로젝트 단위로만 쓰려면 `.claude/skills/`에 넣으면 됩니다.
+필요한 것만 골라 복사해도 됩니다. 스킬끼리 서로 의존하지 않습니다.
 
 ```bash
 cp -R solo-skills/skills/book-pdf ~/.claude/skills/
@@ -70,12 +136,7 @@ cp -R solo-skills/skills/book-pdf ~/.claude/skills/
 
 **실제로 써본 것만 넣었습니다.** 직접 하다가 깨진 지점이 그대로 적혀 있습니다.
 
-예를 들어 `web-demo-video`에는 이런 줄이 있습니다.
-
-> 무대 페이지와 대상 사이트는 반드시 같은 오리진이어야 한다.
-> 포트가 다르면 `iframe.contentDocument` 접근이 막혀서 조작이 불가능하다.
-
-`kakaotalk-cli`에는 실패한 경로도 같이 적어뒀습니다. 한글은 `keystroke`로 넣으면 자모가 깨지고, SSH에서 `pbcopy`는 GUI 페이스트보드에 붙지 않습니다. 그래서 어떤 방법을 쓰는지까지 이유와 함께 있습니다.
+성공한 방법만 적으면 다음 사람이 같은 데서 또 막힙니다. 그래서 실패한 경로와 그 이유를 같이 남겼습니다. 위에서 본 한글 자모 깨짐, 문체표 오판, 전사 유실 같은 것들이요.
 
 **한국에서 일하는 사람 기준입니다.** 네이버 블로그, 카카오톡, 당근마켓, 스레드처럼 국내에서 실제로 쓰는 도구를 다룹니다.
 
@@ -83,30 +144,27 @@ cp -R solo-skills/skills/book-pdf ~/.claude/skills/
 
 ## 기여
 
-같은 문제를 다르게 푼 방법, 더 나은 절차, 깨진 부분 제보 모두 환영합니다.
+같은 문제를 다르게 푼 방법, 더 나은 절차, 안 되는 부분 제보 모두 환영합니다.
 
 - **스킬 제안·수정** → Pull Request
 - **안 되는 것 제보** → Issue
-- 새 스킬은 `skills/<이름>/SKILL.md` 한 파일이면 충분합니다. 형식은 기존 스킬을 참고하세요.
+- 새 스킬은 `skills/<이름>/SKILL.md` 한 파일이면 충분합니다
 
-[CONTRIBUTING.md](CONTRIBUTING.md)에 작성 기준을 정리해뒀습니다.
+[CONTRIBUTING.md](CONTRIBUTING.md)에 작성 기준이 있습니다.
 
 ---
 
 ## 만든 사람
 
-안태현 (밤밤) — 커뮤니티 기획자. 관계자본 커뮤니티 [GET100](https://get100.co.kr)을 6기까지 운영하고 있습니다.
+안태현 (밤밤) — 커뮤니티 기획자. 관계자본 커뮤니티 [GET100](https://get100.co.kr)을 6기까지 운영했습니다.
 
-- 커뮤니티 운영, 콘텐츠 발행, 고객 응대, 제품 제작을 혼자 합니다
-- 그래서 이 스킬들이 필요했습니다
-
-문의나 제안은 Issue 또는 [get100.co.kr](https://get100.co.kr)로 주세요.
+커뮤니티 운영, 콘텐츠 발행, 고객 응대, 제품 제작을 혼자 합니다. 그래서 이 스킬들이 필요했습니다.
 
 ---
 
 ## 라이선스
 
-[MIT](LICENSE) — 자유롭게 쓰고 고치고 재배포하셔도 됩니다.
+[MIT](LICENSE)
 
 ---
 
