@@ -10,6 +10,18 @@ description: "내 글에 달린 댓글에 답글을 대신 쓴다. 기존 답글
 - 브랜드 계정(브랜드 계정)이 **남의 글에 콜드로 댓글** 다는 기준은 `~/Projects/<프로젝트>/마케팅/threads-1000/ENGAGE-VOICE.md`다. 그쪽 철칙 3개(한 줄·미러링 금지·존대 유지)는 여기서도 유효하지만, **거기 적힌 말투 마커(`ㅇ_ㅇ?` `~넹 ~당 ~욤`)는 사용자의 *게시물* 에서 뽑은 것이라 답글에서는 거의 안 쓰인다**(실측 ㅇ_ㅇ 0.0%, `~` 2.5%). 답글은 이 문서를 정본으로 본다.
 - 계정 성과 분석은 `threads-analytics` 스킬.
 
+## 바로 쓰는 스크립트
+
+[`scripts/publish-thread.mjs`](scripts/publish-thread.mjs) — Threads Graph API로 타래를 발행합니다.
+
+```bash
+node scripts/publish-thread.mjs draft.txt          # dry-run: 파싱 결과만 출력
+node scripts/publish-thread.mjs draft.txt --go     # 실제 발행
+```
+
+`━━━ 헤더 ━━━` 구분선으로 글을 나누고, 헤더에 "댓글"이 들어가면 첫 댓글로 붙입니다.
+**기본이 dry-run입니다.** 발행 사고를 막으려고 `--go`를 명시해야만 나갑니다.
+
 ## 근거
 
 Threads Graph API `GET /me/replies` 전량 **22,560건**(2024-04-26 ~ 2026-08-08) 실측.

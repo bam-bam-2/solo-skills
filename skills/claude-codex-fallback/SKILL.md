@@ -18,3 +18,14 @@ description: "CLI 자동화에서 기본 모델을 쓰다가 사용량 한도에
    - Claude 사용량 한도: Codex 호출 및 성공
    - Claude 일반 오류: Codex 미호출
 8. 실제 운영 환경에서 무발송 또는 읽기 전용 프롬프트로 한도 감지와 폴백 성공 로그를 확인한다.
+
+## 바로 쓰는 스크립트
+
+[`scripts/llm-with-fallback.sh`](scripts/llm-with-fallback.sh) — 실제로 매일 돌고 있는 실행기입니다.
+
+```bash
+echo "이번 주 지표 요약해줘" | ./scripts/llm-with-fallback.sh 80 opus
+```
+
+Claude를 먼저 쓰고, **사용량 한도 초과일 때만** 같은 프롬프트를 Codex로 재실행합니다.
+프롬프트는 임시파일에 `chmod 600`으로 두고 종료 시 지웁니다.

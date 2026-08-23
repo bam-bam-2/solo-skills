@@ -10,6 +10,18 @@ description: "마크다운 원고를 진짜 책처럼 보이는 PDF·EPUB 전자
 
 이 스킬은 [Paged.js](https://pagedjs.org)(MIT, `https://unpkg.com/pagedjs/dist/paged.polyfill.js`)를 브라우저에 스크립트 태그로 로드해 CSS Paged Media 기능(러닝헤더, 목차 쪽번호 자동생성)을 구현한다. Chromium이 네이티브로 지원 안 하는 기능이라 이 폴리필이 필요하다.
 
+## 바로 쓰는 스크립트
+
+[`scripts/html-to-pdf.py`](scripts/html-to-pdf.py) — Paged.js로 조판한 HTML을 PDF로 굽습니다.
+
+```bash
+pip install playwright && playwright install chromium
+python scripts/html-to-pdf.py book.html
+python scripts/html-to-pdf.py "chapters/*.html"    # 여러 개 한 번에
+```
+
+`--output`으로 경로를 지정할 수 있고, 생략하면 입력 파일명 그대로 `.pdf`가 나옵니다.
+
 ## 이 환경(Aside REPL)의 알려진 함정
 
 1. **`page.pdf({width, height})` 파라미터가 무시된다.** 항상 US Letter로 나온다. 반드시 `preferCSSPageSize: true`를 주고 CSS `@page { size: 148mm 210mm; }`로 크기를 지정할 것. `format: 'A5'` 같은 심볼릭 사이즈도 마찬가지로 무시되니 쓰지 말 것.

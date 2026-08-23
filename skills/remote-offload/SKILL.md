@@ -5,6 +5,18 @@ description: "무거운 작업(스크래핑, 인코딩, 빌드, 대량 API 수�
 
 # 원격 머신 오프로딩
 
+## 바로 쓰는 스크립트
+
+[`scripts/offload.sh`](scripts/offload.sh) — 무거운 작업을 원격 기기로 넘깁니다.
+
+```bash
+./scripts/offload.sh "python heavy_scraper.py"
+./scripts/offload.sh --dir ~/Projects/app "npm run build"
+./scripts/offload.sh --bg "ffmpeg -i in.mov -c:v libx264 out.mp4"   # 백그라운드
+```
+
+원격이 죽어 있으면 **로컬로 폴백하지 않고 그냥 멈춥니다.** 메모리 부족으로 노트북이 죽는 걸 막기 위해서입니다.
+
 ## 왜
 
 | | Aside 돌아가는 기기 | 오프로딩 대상 |
