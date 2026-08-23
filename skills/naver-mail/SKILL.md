@@ -8,6 +8,18 @@ description: "네이버 메일을 브라우저 없이 IMAP으로 읽는다. 웹 
 네이버 웹메일은 세션이 자주 만료되고, 만료되면 저장된 비밀번호가 없어 로그인 화면에서 막힌다.
 **앱 비밀번호가 이미 `.env`에 있으므로 IMAP으로 바로 붙는 게 빠르다.**
 
+## 바로 쓰는 스크립트
+
+[`scripts/send_naver_mail.py`](scripts/send_naver_mail.py) — 네이버 SMTP 발송기입니다. 첨부파일을 지원합니다.
+
+```bash
+python scripts/send_naver_mail.py \
+  --to someone@example.com --subject "제목" \
+  --body-file body.txt --attach report.pdf
+```
+
+계정 정보는 코드에 넣지 말고 `.env`에 둡니다. 네이버는 **애플리케이션 비밀번호**를 따로 발급받아야 합니다.
+
 ## 자격증명 위치
 
 ```

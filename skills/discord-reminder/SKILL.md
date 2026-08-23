@@ -34,3 +34,15 @@ Use the remote-host instead of Aside routine slots for scheduled reminders.
 9. Do not test-send a real DM unless the user asks. Report the resolved date, time, timezone, delivery channel, and loaded label.
 
 Use concise reminder text that says what happened, what the user should do next, and any account or product distinction needed to avoid a wrong action.
+
+## 바로 쓰는 스크립트
+
+[`scripts/make-reminder.sh`](scripts/make-reminder.sh) — 일회성 리마인더를 launchd에 등록합니다.
+
+```bash
+export DISCORD_BOT_TOKEN=... DISCORD_USER_ID=...
+./scripts/make-reminder.sh cancel-check "2026-09-02 10:00" "구독 해지 확인하기"
+```
+
+지정한 시각에 DM이 한 번 가고 **잡이 스스로 내려갑니다.**
+`StartInterval`이 아니라 `StartCalendarInterval`을 쓰는 이유는 아래 함정 항목을 보세요.

@@ -14,6 +14,7 @@
 나머지는 제 계정·서버에 묶여 있어서 목록으로만 남겼습니다 → [fleet.md](fleet.md)
 
 Claude Code, Codex, OpenCode 등 SKILL.md 규격을 읽는 에이전트에서 그대로 씁니다.
+각 스킬은 **에이전트가 읽고 수행하는 작업 절차서**이고, 그중 6개에는 제가 실제로 돌리는 **실행 스크립트**가 같이 들어 있습니다.
 
 > **⭐ 도움이 되셨다면 스타 눌러주세요.**
 > 혼자 일하는 분들이 이 저장소를 찾는 거의 유일한 경로입니다.
@@ -47,6 +48,23 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 처음부터 49개였던 건 아닙니다. 같은 일을 세 번쯤 반복하고 "이거 왜 내가 하지" 싶을 때 하나씩 만들었습니다.
 그 과정에서 깨진 것들을 스킬로 정리한 게 아래 15개입니다.
+
+---
+
+## 바로 실행되는 스크립트
+
+절차서만으로 부족한 것들은 실제 코드를 같이 넣었습니다. 전부 제 기기에서 돌고 있는 것들입니다.
+
+| 스킬 | 스크립트 | 하는 일 |
+| --- | --- | --- |
+| claude-codex-fallback | `llm-with-fallback.sh` | Claude 우선 실행, 한도 초과 시에만 Codex로 재실행 |
+| remote-offload | `offload.sh` | 무거운 작업을 원격 기기로 넘김. 원격이 죽어 있으면 로컬 폴백 없이 중단 |
+| discord-reminder | `make-reminder.sh` | 일회성 리마인더를 launchd에 등록, 발송 후 자동 삭제 |
+| book-pdf | `html-to-pdf.py` | Paged.js 조판 HTML을 PDF로 굽기 |
+| threads-reply | `publish-thread.mjs` | Threads 타래 발행. 기본 dry-run, `--go`로만 실제 발행 |
+| naver-mail | `send_naver_mail.py` | 네이버 SMTP 발송, 첨부파일 지원 |
+
+나머지 9개는 실행 코드가 제 계정·서버에 묶여 있어서 절차와 함정만 정리했습니다.
 
 ---
 
