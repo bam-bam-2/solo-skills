@@ -143,7 +143,7 @@ notion-query-data-sources: SELECT "회차","제목","date:날짜:start" FROM "co
 
 | 사람 | 페이지 ID |
 |---|---|
-| 사용자(안태현) | `NOTION_DB_ID` |
+| 사용자 | `NOTION_DB_ID` |
 | 시할(○○○) | `NOTION_DB_ID` |
 | 마르시아(○○○) | `NOTION_DB_ID` |
 | 스꿀(○○○) | `NOTION_DB_ID` |
