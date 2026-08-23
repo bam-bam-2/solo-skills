@@ -231,7 +231,11 @@ SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16
 ## 글 다듬기 — 문체·윤문
 
 ### 🧹 humanize-korean — AI가 쓴 한글을 사람 글로 되돌리기
-`~가 아니라` 대조 구문, `여정`, `굴러가다` 같은 AI 특유의 표현을 잡아냅니다. 제가 계속 지적받으면서 쌓은 금지어 목록이 그대로 들어 있습니다.
+`~가 아니라` 대조 구문, `여정`, `굴러가다` 같은 AI 특유의 표현을 잡아냅니다.
+
+**제가 만든 게 아닙니다.** 뼈대는 한국 번역학계의 번역투 연구(이영옥 2001 이후 8대 유형)와
+KatFish 정량 보고서의 지표를 가져와 세웠고, 제 경험은 그 위에 금지어 몇 개를 얹은 정도입니다.
+학술 출처 전문은 [`references/scholarship.md`](skills/humanize-korean/references/scholarship.md)에 논문·연도·저널·페이지까지 그대로 적어뒀습니다.
 
 ### 🧬 voice-dna-creator — 문체를 수치로 뽑아내기
 길이·줄바꿈·어미·인칭 분포를 재서, 다음 글을 그 범위 안에서 쓰게 합니다. 감으로 쓰다가 "네 문체가 아니다"라는 말을 듣고 만들었습니다.
@@ -316,6 +320,19 @@ cp -R solo-skills/skills/book-pdf ~/.claude/skills/
 | [ffmpeg](https://ffmpeg.org) | FFmpeg | web-demo-video (프레임 합성) |
 | [Playwright](https://playwright.dev) | Microsoft | web-demo-video, daangn-search |
 | Whisper | OpenAI | meeting-minutes (전사) |
+| pandoc | John MacFarlane | book-pdf (마크다운 변환) |
+| Puppeteer | Google | measured-ui-callouts (렌더링 측정) |
+
+### 연구·자료 출처
+
+문서로 된 지식도 남의 것을 가져온 게 있습니다.
+
+| 스킬 | 가져온 것 |
+| --- | --- |
+| humanize-korean | **한국 번역학계 번역투 연구 8대 유형** (이영옥 2001 외 다수) + **KatFish 정량 보고서**의 수치 임계값. 분류 체계의 뼈대 자체가 여기서 왔습니다. 논문·연도·저널·페이지는 [`scholarship.md`](skills/humanize-korean/references/scholarship.md)에 원문 그대로 있습니다 |
+
+내가 만든 것과 가져온 것을 섞어서 내 것처럼 소개하지 않으려 합니다.
+초판 README에서 humanize-korean을 "제가 쌓은 금지어 목록"이라고 썼는데, 사실이 아니어서 바로잡았습니다.
 
 카카오톡 스킬은 **kmsg를 알게 된 뒤에야 쓸 수 있게 됐습니다.** 스레드에서 다른 분이 댓글로 알려주셔서 알았습니다.
 
