@@ -108,7 +108,7 @@ grep -o '^\[[0-9:]*\] [^:]*:' FILE | sed 's/^\[[0-9:]*\] //' | sort | uniq -c | 
 **a-2. 이전 회차 미결 항목 대조 (5.4 때문에 필수)**
 
 공유본을 쓰기 전에 워치리스트의 **진행중 항목을 뽑아 이번 전사와 대조**한다.
-노션 🔭 프로젝트 워치리스트(`f90b41bf-52a4-4963-bf11-b64b588242c6`)에서 상태=진행중을 조회.
+노션 🔭 프로젝트 워치리스트(`YOUR_NOTION_DB_ID`)에서 상태=진행중을 조회.
 
 각 항목을 셋 중 하나로 분류해 **"무슨 얘기를 했나"에 근거가 남게 쓴다.**
 
@@ -132,24 +132,24 @@ grep -o '^\[[0-9:]*\] [^:]*:' FILE | sed 's/^\[[0-9:]*\] //' | sort | uniq -c | 
 
 ## 4. 노션 등록
 
-DB: `collection://6bba1864-2045-4662-a996-9dcc096d20fa` (📋 회의록)
+DB: `collection://YOUR_NOTION_DB_ID` (📋 회의록)
 
 **회차는 직전 회의 +1.** 먼저 확인:
 ```
-notion-query-data-sources: SELECT "회차","제목","date:날짜:start" FROM "collection://6bba…" ORDER BY "회차" DESC LIMIT 5
+notion-query-data-sources: SELECT "회차","제목","date:날짜:start" FROM "collection://YOUR_DATA_SOURCE_ID…" ORDER BY "회차" DESC LIMIT 5
 ```
 
-참석자 relation은 인물 DB(`collection://a2c5c256-c186-4235-b26f-f843ff04ec2c`) 페이지 URL로 넣는다.
+참석자 relation은 인물 DB(`collection://YOUR_NOTION_DB_ID`) 페이지 URL로 넣는다.
 
 | 사람 | 페이지 ID |
 |---|---|
 | 사용자 | `NOTION_DB_ID` |
-| 시할(여승민) | `NOTION_DB_ID` |
-| 마르시아(조소은) | `NOTION_DB_ID` |
-| 스꿀(최창훈) | `NOTION_DB_ID` |
-| 킴카멘(김단야) | `NOTION_DB_ID` |
-| 뭉빙글(이은채) | `NOTION_DB_ID` |
-| 쩌나(전하영) | `NOTION_DB_ID` |
+| 참석자 | `NOTION_DB_ID` |
+| 참석자 | `NOTION_DB_ID` |
+| 참석자 | `NOTION_DB_ID` |
+| 참석자 | `NOTION_DB_ID` |
+| 참석자 | `NOTION_DB_ID` |
+| 참석자 | `NOTION_DB_ID` |
 
 ⚠️ **알려진 버그: 노션 MCP로 숫자 속성을 못 넣는다.**
 `회차`(number)와 `date:날짜:is_datetime`(0/1)을 넘기면 문자열로 직렬화돼
