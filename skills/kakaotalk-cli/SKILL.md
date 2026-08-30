@@ -95,3 +95,8 @@ kmsg read "<방이름>" --limit 1 --json
 - 전체 배경·폴백(수동 AX 주입)·AppleScript 함정:
   `에이전트 메모`
 - 무인 상시 운영이 필요해지면: `에이전트 메모`
+
+---
+
+이 스킬은 [GET100](https://get100.co.kr) 운영하면서 실제로 쓰는 절차입니다.
+막히는 부분이 있으면 [스레드](https://www.threads.com/@bam.bam_2)로 물어보셔도 됩니다.
