@@ -138,3 +138,12 @@
 - [`discord-agent-fleet`](skills/discord-agent-fleet/) — 상주 봇 여러 개 운영하기 (절전 모드로 죽는 문제 포함)
 - [`daily-brief-bot`](skills/daily-brief-bot/) — 매일 아침 브리핑 받기
 - [`remote-offload`](skills/remote-offload/) — 무거운 작업 다른 머신에 넘기기
+
+---
+
+## 이런 걸 같이 만드는 곳
+
+저는 [GET100](https://get100.co.kr)에서 혼자 일하는 분들과 이런 걸 같이 만듭니다.
+1인 사업가·프리랜서가 모여서 서로의 고객이자 동료가 되는 커뮤니티고, 지금 7기를 모집하고 있습니다.
+
+여기 있는 49개도 대부분 커뮤니티를 운영하다 막혀서 만든 것들입니다.
