@@ -4,6 +4,7 @@
 
 [![stars](https://img.shields.io/github/stars/bam-bam-2/solo-skills?style=social)](https://github.com/bam-bam-2/solo-skills/stargazers)
 [![license](https://img.shields.io/badge/license-MIT-black)](LICENSE)
+[![follow](https://img.shields.io/github/followers/bam-bam-2?style=social&label=Follow)](https://github.com/bam-bam-2)
 
 **직원 없이 49개를 자동화했습니다.**
 
@@ -12,6 +13,9 @@
 
 **그중 남이 그대로 가져다 쓸 수 있는 스킬 26개를 이 저장소에 공개합니다.**
 나머지는 제 계정·서버에 묶여 있어서 목록으로만 남겼습니다 → [fleet.md](fleet.md)
+
+이 스킬들은 1인 사업가·프리랜서 커뮤니티 [GET100](https://get100.co.kr)을 6기까지 운영하면서 만들었습니다.
+혼자 일하는 사람들이 모여 있는 곳이라, 거기서 나온 문제를 하나씩 풀다 보니 이렇게 쌓였습니다.
 
 Claude Code, Codex, OpenCode 등 SKILL.md 규격을 읽는 에이전트에서 그대로 씁니다.
 각 스킬은 **에이전트가 읽고 수행하는 작업 절차서**이고, 그중 일부에는 제가 실제로 쓰는 **실행 스크립트**가 같이 들어 있습니다. (8개 스킬 · 파일 9개)
