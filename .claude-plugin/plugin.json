@@ -1,0 +1,48 @@
+{
+  "name": "solo-skills",
+  "description": "1인 사업가 생산성 키트 — 직원 없이 49개를 자동화했고, 그중 바로 쓸 수 있는 AI 에이전트 스킬 26개(+실행 스크립트)",
+  "version": "1.0.0",
+  "author": {
+    "name": "안태현 (밤밤)",
+    "url": "https://get100.co.kr"
+  },
+  "homepage": "https://github.com/bam-bam-2/solo-skills",
+  "repository": "https://github.com/bam-bam-2/solo-skills",
+  "license": "MIT",
+  "keywords": [
+    "productivity",
+    "automation",
+    "solopreneur",
+    "korean",
+    "content",
+    "community-ops"
+  ],
+  "skills": [
+    "./skills/book-pdf",
+    "./skills/claude-codex-fallback",
+    "./skills/community-launch",
+    "./skills/computer-use",
+    "./skills/daangn-search",
+    "./skills/daily-brief-bot",
+    "./skills/discord-agent-fleet",
+    "./skills/discord-reminder",
+    "./skills/event-sales-script",
+    "./skills/harness",
+    "./skills/humanize-korean",
+    "./skills/kakaotalk-cli",
+    "./skills/measured-ui-callouts",
+    "./skills/meeting-minutes",
+    "./skills/meeting-summary",
+    "./skills/multi-method-image-generation",
+    "./skills/naver-blog-post",
+    "./skills/naver-mail",
+    "./skills/notion-delete",
+    "./skills/orchestration",
+    "./skills/remote-offload",
+    "./skills/style-skill-creator",
+    "./skills/threads-reply",
+    "./skills/voice-dna-creator",
+    "./skills/web-demo-video",
+    "./skills/workshop-prep"
+  ]
+}
