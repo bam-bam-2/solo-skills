@@ -13,6 +13,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: 개행 정규화 (검사용)
+        run: find skills -name 'SKILL.md' -exec sed -i 's/\r$//' {} +
+
+
+
+
 
       - name: SKILL.md 프론트매터 검사
         run: |
