@@ -1,0 +1,28 @@
+{
+  "name": "bam-bam-2",
+  "owner": {
+    "name": "안태현 (밤밤)",
+    "url": "https://github.com/bam-bam-2"
+  },
+  "plugins": [
+    {
+      "name": "solo-skills",
+      "source": "./",
+      "description": "1인 사업가 생산성 키트 — 직원 없이 49개를 자동화했고, 그중 바로 쓸 수 있는 AI 에이전트 스킬 26개",
+      "version": "1.0.0",
+      "author": {
+        "name": "안태현 (밤밤)",
+        "url": "https://get100.co.kr"
+      },
+      "homepage": "https://github.com/bam-bam-2/solo-skills",
+      "license": "MIT",
+      "keywords": [
+        "productivity",
+        "automation",
+        "solopreneur",
+        "korean",
+        "agent-skills"
+      ]
+    }
+  ]
+}
