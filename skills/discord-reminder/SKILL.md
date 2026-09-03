@@ -5,6 +5,25 @@ description: "일회성·반복 리마인더를 상시 구동 머신의 launchd/
 
 # Mac-mini Discord reminder
 
+> **이 스킬이 시스템에 하는 일 (설치 전 확인)**
+>
+> - 사용자 홈에 실행 스크립트 하나(`~/Projects/<프로젝트>/<slug>.sh`, mode 700)를 만듭니다.
+> - macOS **launchd 항목 하나**(`~/Library/LaunchAgents/com.bambam.reminder-<slug>.plist`)를 등록합니다.
+> - **일회성 리마인더는 발송 직후 스스로 launchd에서 내려가고 plist를 지웁니다.** 상주하지 않습니다.
+> - 반복 리마인더는 사용자가 지운 시점까지 유지됩니다. 목록은 `launchctl list | grep reminder`로 확인합니다.
+> - 디스코드 토큰은 실행 시점에 `.env`에서만 읽고 출력하지 않습니다.
+>
+> 보안 스캐너는 이 동작을 `service_persistence`(영구 서비스 설치)로 분류합니다. 맞습니다. 다만 일회성 항목은 스스로 제거되고, 만드는 파일은 위 두 개뿐입니다.
+
+
+
+
+
+
+
+
+
+
 Use the remote-host instead of Aside routine slots for scheduled reminders.
 
 1. Resolve relative dates in Asia/Seoul and choose a concrete KST time. If the user gives no time, use 10:00 KST and state it.
