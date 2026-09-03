@@ -1,6 +1,6 @@
 ---
-name: cw-style-skill-creator
-description: Creative writing skill for creating style skills that teach Claude to write in specific styles. Use when you want to create style guides that Claude can follow when writing long-form content. Creates AI-directive style guides based on analyzing existing writing samples. 트리거: "내 글체로 스킬 만들어줘", "문체 스킬 생성", "글쓰기 스타일 학습", "/cw-style-skill-creator". 산출물이 스킬 파일이 아니라 보이스 프로필 문서면 voice-dna-creator 사용.
+name: style-skill-creator
+description: Creative writing skill for creating style skills that teach Claude to write in specific styles. Use when you want to create style guides that Claude can follow when writing long-form content. Creates AI-directive style guides based on analyzing existing writing samples. 트리거: "내 글체로 스킬 만들어줘", "문체 스킬 생성", "글쓰기 스타일 학습", "/style-skill-creator". 산출물이 스킬 파일이 아니라 보이스 프로필 문서면 voice-dna-creator 사용.create style guides that Claude can follow when writing long-form content. Creates AI-directive style guides based on analyzing existing writing samples. 트리거: "내 글체로 스킬 만들어줘", "문체 스킬 생성", "글쓰기 스타일 학습", "/cw-style-skill-creator". 산출물이 스킬 파일이 아니라 보이스 프로필 문서면 voice-dna-creator 사용.
 ---
 
 # Style Skill Creator
