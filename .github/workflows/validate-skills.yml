@@ -1,0 +1,71 @@
+name: validate-skills
+
+on:
+  push:
+    paths: ['skills/**', '.claude-plugin/**']
+  pull_request:
+    paths: ['skills/**', '.claude-plugin/**']
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: SKILL.md 프론트매터 검사
+        run: |
+          fail=0
+          for d in skills/*/; do
+            n=$(basename "$d")
+            f="$d/SKILL.md"
+
+            if [ ! -f "$f" ]; then
+              echo "::error::$n — SKILL.md 없음"; fail=1; continue
+            fi
+
+            if [ "$(head -1 "$f")" != "---" ]; then
+              echo "::error::$n — 프론트매터가 --- 로 시작하지 않음"; fail=1
+            fi
+
+            name=$(awk '/^---$/{c++; next} c==1 && /^name:/{sub(/^name:[[:space:]]*/,""); gsub(/"/,""); print; exit}' "$f")
+            desc=$(awk '/^---$/{c++; next} c==1 && /^description:/{print; exit}' "$f")
+
+            [ -z "$name" ] && { echo "::error::$n — name 필드 없음"; fail=1; }
+            [ -z "$desc" ] && { echo "::error::$n — description 필드 없음"; fail=1; }
+
+            if [ -n "$name" ] && [ "$name" != "$n" ]; then
+              echo "::error::$n — name('$name')이 디렉터리명과 다름"; fail=1
+            fi
+
+            if [ -n "$name" ] && ! echo "$name" | grep -Eq '^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?$'; then
+              echo "::error::$n — name 규칙 위반 (소문자·숫자·하이픈, 64자 이내)"; fail=1
+            fi
+          done
+          [ $fail -eq 0 ] && echo "스킬 $(ls -1 skills | wc -l | tr -d ' ')개 프론트매터 통과"
+          exit $fail
+
+      - name: 플러그인 매니페스트와 스킬 목록 대조
+        run: |
+          ls -1 skills | sort > /tmp/dirs.txt
+          grep -oE '\./skills/[a-z0-9-]+' .claude-plugin/plugin.json | sed 's|./skills/||' | sort > /tmp/listed.txt
+          if ! diff -q /tmp/dirs.txt /tmp/listed.txt > /dev/null; then
+            echo "::error::plugin.json과 skills/ 폴더가 불일치"
+            diff /tmp/dirs.txt /tmp/listed.txt || true
+            exit 1
+          fi
+          echo "매니페스트 $(wc -l < /tmp/dirs.txt | tr -d ' ')개 일치"
+
+      - name: 스크립트 문법 검사
+        run: |
+          for f in $(find skills -name '*.sh'); do bash -n "$f" || exit 1; done
+          for f in $(find skills -name '*.py'); do python3 -m py_compile "$f" || exit 1; done
+          echo "스크립트 문법 통과"
+
+      - name: 자격증명·개인정보 검사
+        run: |
+          if grep -rniE '(sk-[A-Za-z0-9]{20}|ghp_[A-Za-z0-9]{20}|xoxb-[0-9]{10}|010-[0-9]{4}-[0-9]{4})' skills/ | grep -v '010-0000-0000'; then
+            echo "::error::자격증명 또는 실제 전화번호로 보이는 문자열 발견"; exit 1
+          fi
+          echo "개인정보 검사 통과"
