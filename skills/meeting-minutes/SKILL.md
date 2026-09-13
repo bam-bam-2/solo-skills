@@ -19,7 +19,7 @@ cd "~/Projects/<프로젝트>/이벤트/버추얼 프로젝트"
 TOKEN=$(grep '^프로젝트_DISCORD_BOT_TOKEN=' .env | cut -d= -f2-)
 CH=$(curl -s -X POST -H "Authorization: Bot $TOKEN" -H "Content-Type: application/json" \
   -H "User-Agent: DiscordBot (https://github.com/bambam/twc-pm, 1.0)" \
-  -d '{"recipient_id":"483902030243692546"}' \
+  -d '{"recipient_id":"<DISCORD_ID>"}' \
   "https://discord.com/api/v10/users/@me/channels" \
   | python3 -c "import json,sys;print(json.load(sys.stdin)['id'])")
 bash scripts/twc-dm-download-transcripts.sh "$CH" "회의록 전사/_dm받은전사" 5
@@ -159,7 +159,7 @@ notion-query-data-sources: SELECT "회차","제목","date:날짜:start" FROM "co
 
 ## 5. 디스코드 공지
 
-채널 **📃회의-안건및기록** `1515265088720736312`. 형식은 고정이다.
+채널 **📃회의-안건및기록** `<DISCORD_ID>`. 형식은 고정이다.
 
 ```
 📋 **회의록 업데이트했습니다!**
@@ -171,11 +171,11 @@ notion-query-data-sources: SELECT "회차","제목","date:날짜:start" FROM "co
 ```
 
 ```bash
-bash scripts/twc-discord-post.sh 1515265088720736312 /tmp/msg.txt
+bash scripts/twc-discord-post.sh <DISCORD_ID> /tmp/msg.txt
 ```
 
 리마인드·담당별 할 일 같은 팀 대상 공지는 파트 채널로 간다:
-🗺️맵·트리거-회의 `1516891094925971676` / 🖼️디자인-회의 `1516891...` / 💻영상-회의 `1515265089744408642`
+🗺️맵·트리거-회의 `<DISCORD_ID>` / 🖼️디자인-회의 `1516891...` / 💻영상-회의 `<DISCORD_ID>`
 
 ## 5.4 회의록 본문이 조사봇 판정 근거로 쓰인다 (2026-08-17부터)
 

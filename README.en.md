@@ -13,7 +13,7 @@
 I run a community through its 6th cohort. Product demo videos, ebook PDFs, blog posts, meeting minutes, customer messages, comment replies — I did all of it alone.
 I got tired of the busywork and started scripting things one at a time. It grew to 49.
 
-**26 of them work on someone else's machine. Those are in this repo.**
+**38 of them work on someone else's machine. Those are in this repo.**
 The rest are tied to my own accounts and servers, so I only listed them → [fleet.md](fleet.md)
 
 ### Where this came from
@@ -23,7 +23,9 @@ The rest are tied to my own accounts and servers, so I only listed them → [fle
 When you work alone there is nobody to hand the busywork to. So I automated it, and most of these skills came out of problems I hit while running that community.
 
 Works with Claude Code, Codex, OpenCode, and anything else that reads the SKILL.md format.
-Each skill is **a procedure an agent reads and executes**, and some ship with **the actual scripts I run** (8 skills, 9 files).
+Each skill is **a procedure an agent reads and executes**, and some ship with **the actual scripts I run** (10 skills, 19 files).
+
+22 of the 38 carry a **"what this skill does to your system"** notice at the top: which permissions it needs, what it actually publishes or sends, and whether that is reversible. Read it before installing.
 
 > **⭐ If any of this is useful, a star helps.**
 > It is close to the only way people who work alone find this repo.
@@ -70,7 +72,7 @@ always on     4 Discord bots · dashboard server
 The full list and schedule is in **[fleet.md](fleet.md)**.
 
 It was never 49 from the start. Every time I did the same thing three times and thought "why am I doing this", I built one.
-What broke along the way became the 26 skills below.
+What broke along the way became the 38 skills below.
 
 ---
 
@@ -86,12 +88,14 @@ Where a written procedure was not enough, I included the actual code. All of it 
 | book-pdf | `html-to-pdf.py` | Paged.js-typeset HTML to PDF |
 | threads-reply | `publish-thread.mjs` | Publish a Threads chain. Dry-run by default, `--go` to actually post |
 | naver-mail | `send_naver_mail.py` | Naver SMTP with attachments |
+| lecture-recording-captions | 9 scripts | Talk recording to captioned video: transcribe, correct, assemble, compose. Resumable per stage |
+| threads-long-thread | `ai_smell.mjs` | Scores a draft's "AI smell" by how far its line-length distribution drifts from measured human posts |
 
 The other skills have their execution code tied to my accounts and servers, so only the procedures and the traps are documented.
 
 ---
 
-## The 26 skills
+## The 38 skills
 
 Picked from the 49 — only the ones that work in someone else's environment.
 
@@ -105,15 +109,41 @@ Picked from the 49 — only the ones that work in someone else's environment.
 
 **🎨 multi-method-image-generation** — Generates the same image through every available path (CLI tools, Gemini API, HTML/CSS rendering, existing assets) and compares them before recommending one.
 
+**🎞 lecture-recording-captions** — A talk recording in, a captioned video out: word-level highlight captions, per-slide title cards, zoom on what matters, face PIP, Q&A layout, end card. Split into 9 scripts so a mistake in the middle does not cost you the whole run.
+
+**🎬 threads-to-reels** — Turns posts that already performed into vertical video. It does not invent new material; it only reuses what the audience already validated.
+
+**✂️ testimonial-clips** — Pulls the testimonial section out of a call recording and cuts it into a captioned short. Includes a consent step, since you are editing someone else's words.
+
 ### Writing and publishing
 
-**✍️ naver-blog-post** — Posts written for Naver search (Korea's dominant search engine). Includes what actually gets indexed, measured from my own posts.
+**✍️ naver-howto-post** — How-to posts written for Naver search (Korea's dominant search engine). Clickbait title patterns are banned because Naver classifies them as spam.
+
+**📔 naver-branding-post** — Posts that show how you think rather than what you finished. Planning notes, talk write-ups.
+
+**🧳 naver-travel-post** — Place and travel write-ups from photos, itinerary and cost, including sponsored-post disclosure requirements.
+
+> These three used to be one blog skill. Title, length and tone rules conflicted between the genres, so a single skill produced posts that fit none of them.
+
+**🧵 threads-long-thread** — A spec for 13-30 part chains, reverse-engineered from **3,870 public posts across two accounts that do this well**. Characters per part, where line breaks go, what part 1 has to establish — as numbers, not vibes.
+
+**📊 threads-analytics** — View count alone will mislead you. My highest-reach post (550k views) got 2 reposts, while the reposted ones were a different kind of post entirely. Ranks reposts, share rate and engagement on **separate** axes, and includes how to find a reach cliff from your own data instead of trusting the platform's self-diagnosis.
+
+**📣 getback-broadcast** — Publishing one announcement across several channels: the routes, the Cloudflare 403 on a default User-Agent, and re-reading after posting to verify it landed.
 
 **💬 threads-reply** — Replies in your own voice, derived by measuring your past posts (length, line breaks, endings, person) rather than guessing at tone.
 
 ### Dealing with people — meetings, messages, mail
 
 **📝 meeting-minutes** — Transcript in, structured minutes out, posted to Notion and announced on Discord.
+
+**🗣 advisory-minutes** — The 1:1 version: minutes, task board entries, dashboard update and the client notification. Different structure from group minutes because progress and homework carry between sessions.
+
+**💰 value-based-proposal** — Price by the outcome the client gets, not the hours you put in. The useful part is the failure log: cutting only the session count in the premium tier while keeping every other benefit removed any reason to pick it.
+
+**📮 getback-recruit-mail** — Cross-checks recipients three ways before a bulk send, so people who already signed up do not receive a recruiting email.
+
+**📲 iphone-sms-read** — Read iPhone messages from your Mac for verification codes and "did they text back." **Read-only; there is no send path.**
 
 **📱 kakaotalk-cli** — Read and send KakaoTalk on macOS (Korea's dominant messenger). **macOS only** — it relies on Accessibility APIs.
 

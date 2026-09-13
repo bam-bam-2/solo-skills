@@ -1,9 +1,7 @@
 ---
-name: claude-codex-fallback
-description: "CLI 자동화에서 기본 모델을 쓰다가 사용량 한도에 걸리면 다른 CLI로 자동 재실행하는 폴백을 구현한다."
+name: "claude-codex-fallback"
+description: "CLI 기반 자동화에서 Claude를 우선 사용하고 계정 사용량 한도 초과 때만 Codex로 재실행하는 폴백을 구현하거나 점검할 때 사용"
 ---
-
-# Claude 우선, Codex 조건부 폴백
 
 > **이 스킬이 시스템에 하는 일 (설치 전 확인)**
 >
@@ -12,11 +10,7 @@ description: "CLI 자동화에서 기본 모델을 쓰다가 사용량 한도에
 > - 프롬프트는 임시파일(`mktemp`, mode 600)에 두고 **종료 시 삭제**합니다.
 > - 네트워크 호출은 각 CLI가 하는 것뿐이고, 이 스크립트가 따로 하는 외부 통신은 없습니다.
 
-
-
-
-
-
+# Claude 우선, Codex 조건부 폴백
 
 1. 같은 프롬프트를 안전한 임시파일에 저장한다.
 2. Claude Code를 먼저 실행한다. 자동화에 필요한 모델, 권한, 턴 상한을 기존 작업과 동일하게 유지한다.
@@ -31,14 +25,3 @@ description: "CLI 자동화에서 기본 모델을 쓰다가 사용량 한도에
    - Claude 사용량 한도: Codex 호출 및 성공
    - Claude 일반 오류: Codex 미호출
 8. 실제 운영 환경에서 무발송 또는 읽기 전용 프롬프트로 한도 감지와 폴백 성공 로그를 확인한다.
-
-## 바로 쓰는 스크립트
-
-[`scripts/llm-with-fallback.sh`](scripts/llm-with-fallback.sh) — 실제로 매일 돌고 있는 실행기입니다.
-
-```bash
-echo "이번 주 지표 요약해줘" | ./scripts/llm-with-fallback.sh 80 opus
-```
-
-Claude를 먼저 쓰고, **사용량 한도 초과일 때만** 같은 프롬프트를 Codex로 재실행합니다.
-프롬프트는 임시파일에 `chmod 600`으로 두고 종료 시 지웁니다.
