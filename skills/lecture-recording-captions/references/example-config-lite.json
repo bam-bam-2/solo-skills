@@ -1,0 +1,37 @@
+{
+  "_comment": "GET100 7기 OT (2026-09-07). 줌 클라우드 녹화본. 슬라이드 구간표 기반 기능(타이틀카드·확대·일러스트)은 제외 — 화면이 슬라이드/디스코드/웹캠으로 계속 바뀌는 소스라 적용 불가. 자막 + 얼굴 PIP + 엔드카드만 사용.",
+  "work_dir": "/Users/mac/Projects/getback/운영/강연/ot_7gi_recording",
+  "ffmpeg": "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg",
+  "audio": "audio_only.m4a",
+  "segments": "segs_final.json",
+  "output": "GET100_7기_OT_자막판.mp4",
+  "subtitle": {
+    "font": "NanumGothic ExtraBold",
+    "size": 58,
+    "size_phase2": 58,
+    "sung": "&H00FF2F7B",
+    "unsung": "&H00FFFFFF",
+    "box": "&H96000000",
+    "max_chars": 24,
+    "max_span": 4.2,
+    "gap": 0.9
+  },
+  "card_font": "BM JUA",
+  "phase1": {
+    "start": 0,
+    "end": 6688,
+    "base": "base.mp4",
+    "runs": [[0, 6688, 1]],
+    "titles": {},
+    "zoom": {},
+    "illustrations": {}
+  },
+  "endcard": {
+    "duration": 10,
+    "lines": [
+      "GET100 7기 OT — 나만의 커뮤니티, 나만의 비즈니스",
+      "밤밤  ·  GET100 겟백  ·  2026.09.07",
+      "자막 나눔고딕  ·  타이틀 배달의민족 주아체 (우아한형제들)"
+    ]
+  }
+}
