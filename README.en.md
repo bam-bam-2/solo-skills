@@ -8,10 +8,10 @@
 
 [한국어 README](README.md)
 
-**I automated 49 things without hiring anyone.**
+**I automated 58 things without hiring anyone.**
 
 I run a community through its 6th cohort. Product demo videos, ebook PDFs, blog posts, meeting minutes, customer messages, comment replies — I did all of it alone.
-I got tired of the busywork and started scripting things one at a time. It grew to 49.
+I got tired of the busywork and started scripting things one at a time. It grew to 58.
 
 **38 of them work on someone else's machine. Those are in this repo.**
 The rest are tied to my own accounts and servers, so I only listed them → [fleet.md](fleet.md)
@@ -52,7 +52,7 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 ---
 
-## What the 49 look like
+## What the 58 look like
 
 All of it runs on a single Mac mini.
 
@@ -71,7 +71,7 @@ always on     4 Discord bots · dashboard server
 
 The full list and schedule is in **[fleet.md](fleet.md)**.
 
-It was never 49 from the start. Every time I did the same thing three times and thought "why am I doing this", I built one.
+It was never 58 from the start. Every time I did the same thing three times and thought "why am I doing this", I built one.
 What broke along the way became the 38 skills below.
 
 ---
@@ -97,7 +97,7 @@ The other skills have their execution code tied to my accounts and servers, so o
 
 ## The 38 skills
 
-Picked from the 49 — only the ones that work in someone else's environment.
+Picked from the 58 — only the ones that work in someone else's environment.
 
 ### Making things — video, ebooks, images
 
