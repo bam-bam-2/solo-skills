@@ -9,10 +9,10 @@
 [English README](README.en.md)
 
 
-**직원 없이 49개를 자동화했습니다.**
+**직원 없이 58개를 자동화했습니다.**
 
 커뮤니티를 6기까지 운영하면서 제품 영상 만들기, 전자책 PDF 뽑기, 블로그 글쓰기, 회의록 정리, 고객 카톡, 댓글 답글을 전부 혼자 했습니다.
-잡일하기가 너무 싫어서 하나씩 자동화하다 보니 49개가 됐습니다.
+잡일하기가 너무 싫어서 하나씩 자동화하다 보니 58개가 됐습니다.
 
 **그중 남이 그대로 가져다 쓸 수 있는 스킬 38개를 이 저장소에 공개합니다.**
 나머지는 제 계정·서버에 묶여 있어서 목록으로만 남겼습니다 → [fleet.md](fleet.md)
@@ -67,7 +67,7 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 ---
 
-## 49개는 이런 것들입니다
+## 58개는 이런 것들입니다
 
 맥미니 한 대에서 전부 자동으로 실행됩니다.
 
@@ -86,7 +86,7 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 전체 목록과 시간표는 **[fleet.md](fleet.md)**에 있습니다.
 
-처음부터 49개였던 건 아닙니다. 같은 일을 세 번쯤 반복하고 "이거 왜 내가 하지" 싶을 때 하나씩 만들었습니다.
+처음부터 58개였던 건 아닙니다. 같은 일을 세 번쯤 반복하고 "이거 왜 내가 하지" 싶을 때 하나씩 만들었습니다.
 그 과정에서 깨진 것들을 스킬로 정리한 게 아래 38개입니다.
 
 ---
@@ -112,7 +112,7 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 ## 공개한 스킬 38개
 
-49개를 만들면서 쓴 절차 중, 남의 환경에서도 그대로 작동하는 것만 골랐습니다.
+58개를 만들면서 쓴 절차 중, 남의 환경에서도 그대로 작동하는 것만 골랐습니다.
 
 > **2일차 업데이트** — 반응이 좋아서 창고를 다시 뒤졌습니다. 스킬 폴더가 두 군데로 나뉘어 있었고, 처음엔 그중 한쪽만 공개했습니다. 나머지에서 공개 가능한 것을 추가했습니다. (Anthropic 공식 스킬과 겹치는 `skill-creator`·`slack-gif-creator`는 제 것이 아니라 제외했습니다.)
 
@@ -132,6 +132,7 @@ cp -R solo-skills/skills/* ~/.claude/skills/
 
 ### 🎬 web-demo-video — 화면 녹화 없이 제품 데모 영상
 
+[`web-demo-video`](skills/web-demo-video/)
 **무엇을 하나**
 SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16(릴스·쇼츠·스레드), 16:9(유튜브·랜딩) 세 비율 대응.
 
@@ -154,6 +155,7 @@ SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16
 
 ### 📖 book-pdf — 마크다운을 진짜 책처럼
 
+[`book-pdf`](skills/book-pdf/)
 **무엇을 하나**
 마크다운 원고를 실제 책처럼 보이는 PDF와 EPUB으로 만듭니다. 전자책을 팔려고 만들었습니다.
 
@@ -252,6 +254,7 @@ SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16
 
 ### 📝 meeting-minutes — 회의 끝나면 회의록이 올라가 있기
 
+[`meeting-minutes`](skills/meeting-minutes/)
 **무엇을 하나**
 전사록을 넣으면 회의록으로 정리해 노션 DB에 등록하고 디스코드에 공지까지 합니다.
 
@@ -272,6 +275,7 @@ SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16
 
 ### 📱 kakaotalk-cli — 맥에서 카카오톡 보내고 읽기
 
+[`kakaotalk-cli`](skills/kakaotalk-cli/)
 **막혔던 세 가지**
 1. **한글을 `keystroke`로 넣으면 `ㅁㅁㅁ`으로 깨집니다**
 2. **SSH로 들어가면 `pbcopy`가 GUI 페이스트보드에 안 붙습니다**
@@ -360,6 +364,8 @@ SNS에 올릴 제품 소개 영상을 만듭니다. 1:1(인스타·카톡), 9:16
 ## 글 다듬기 — 문체·윤문
 
 ### 🧹 humanize-korean — AI가 쓴 한글을 사람 글로 되돌리기
+
+[`humanize-korean`](skills/humanize-korean/)
 `~가 아니라` 대조 구문, `여정`, `굴러가다` 같은 AI 특유의 표현을 잡아냅니다.
 
 **제가 만든 게 아닙니다.** 뼈대는 한국 번역학계의 번역투 연구(이영옥 2001 이후 8대 유형)와
@@ -367,42 +373,62 @@ KatFish 정량 보고서의 지표를 가져와 세웠고, 제 경험은 그 위
 학술 출처 전문은 [`references/scholarship.md`](skills/humanize-korean/references/scholarship.md)에 논문·연도·저널·페이지까지 그대로 적어뒀습니다.
 
 ### 🧬 voice-dna-creator — 문체를 수치로 뽑아내기
+
+[`voice-dna-creator`](skills/voice-dna-creator/)
 길이·줄바꿈·어미·인칭 분포를 재서, 다음 글을 그 범위 안에서 쓰게 합니다. 감으로 쓰다가 "네 문체가 아니다"라는 말을 듣고 만들었습니다.
 
 ### ✒️ style-skill-creator — 문체를 가르치는 스킬 만들기
+
+[`style-skill-creator`](skills/style-skill-creator/)
 특정 문체를 학습시키는 스킬 자체를 만들어냅니다.
 
 ## 모임 운영하기 — 회의·워크숍·행사
 
 ### 🗂 meeting-summary — 회의록에서 결정과 할 일만 남기기
+
+[`meeting-summary`](skills/meeting-summary/)
 요약이 아니라 **추출**입니다. 안건별 논의 과정은 버리고 "누가 언제까지 뭘"만 남깁니다.
 
 ### 🎓 workshop-prep — 워크숍 한 건 통째로 준비하기
+
+[`workshop-prep`](skills/workshop-prep/)
 커리큘럼 설계, 준비물, 당일 진행표까지 한 번에 나옵니다.
 
 ### 🎟 event-sales-script — 행사 판매 멘트 만들기
+
+[`event-sales-script`](skills/event-sales-script/)
 같은 행사라도 채널마다 톤이 달라야 해서, 채널별로 따로 뽑습니다.
 
 ### 🚀 community-launch — 커뮤니티 기수 열기
+
+[`community-launch`](skills/community-launch/)
 모집부터 온보딩까지의 절차입니다. 6기까지 운영하면서 굳어진 순서입니다.
 
 ## 에이전트 운영하기
 
 ### 🎛 orchestration — 여러 에이전트에 일 나눠 맡기기
+
+[`orchestration`](skills/orchestration/)
 일을 쪼개서 맡기고 결과를 다시 합치는 절차입니다.
 
 ### 🧰 harness — 전문 에이전트와 그 스킬까지 만들어내기
+
+[`harness`](skills/harness/)
 에이전트를 정의하면 그 에이전트가 쓸 스킬까지 같이 만들어주는 메타 스킬입니다.
 
 ### 🖱 computer-use — 화면 보고 직접 조작하기
+
+[`computer-use`](skills/computer-use/)
 API가 없는 프로그램을 다뤄야 할 때 씁니다.
 
 ### 🗑 notion-delete — 노션 페이지 안전하게 지우기
+
+[`notion-delete`](skills/notion-delete/)
 바로 지우지 않고 대상 목록을 먼저 보여준 뒤 확인받습니다. 잘못 지우면 되돌릴 수 없어서 이렇게 만들었습니다.
 
 
 
-[전체 자동화 49개 보기 →](fleet.md)
+[전체 자동화 58개 보기 →](fleet.md)
 
 ---
 
