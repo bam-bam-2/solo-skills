@@ -78,7 +78,7 @@ urllib 기본 User-Agent는 막힐 수 있으니 헤더를 넣는다. 실패 건
 
 Graph API `keyword_search` 엔드포인트는 이 토큰으로 **HTTP 500**이 난다(`threads_keyword_search` 권한 미부여 추정). 남의 글을 찾을 때는 브라우저로 `https://www.threads.com/search?q=<키워드>&serp_type=default` 에 접속한다.
 
-- 접근성 트리(snapshot)에 검색 결과가 안 잡힌다. `div[data-pressable-container="true"]`의 `innerText` + 내부 `a[href*="/post/"]`로 긁는다
+- 접근성 트리(snapshot)에 검색 결과가 안 잡힌다. `div[data-pressable-container="true"]`의 `innerText` + 내부 `a[href*="/post/"]`로 읽는다
 - 리스트가 가상화돼 있어 스크롤하면 앞 항목이 DOM에서 빠진다. **스크롤 한 칸마다 수집해서 누적**해야 한다(한 번에 긁으면 5건만 남음)
 - 한 키워드당 40~50건이 한계. 동의어를 여러 개 돌려 합집합을 만든다(예: 공간 협찬 / 공간협찬 / 무료 대관 / 대관 협찬 / 장소 협찬)
 

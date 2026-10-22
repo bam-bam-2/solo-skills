@@ -125,7 +125,7 @@ Picked from the 58 — only the ones that work in someone else's environment.
 
 > These three used to be one blog skill. Title, length and tone rules conflicted between the genres, so a single skill produced posts that fit none of them.
 
-**🧵 threads-long-thread** — A spec for 13-30 part chains, reverse-engineered from **3,870 public posts across two accounts that do this well**. Characters per part, where line breaks go, what part 1 has to establish — as numbers, not vibes.
+**🧵 threads-long-thread** — A spec for 13-30 part chains, reverse-engineered from **public posts by two accounts that do this well**. Characters per part, where line breaks go, what part 1 has to establish — as numbers, not vibes.
 
 **📊 threads-analytics** — View count alone will mislead you. My highest-reach post (550k views) got 2 reposts, while the reposted ones were a different kind of post entirely. Ranks reposts, share rate and engagement on **separate** axes, and includes how to find a reach cliff from your own data instead of trusting the platform's self-diagnosis.
 

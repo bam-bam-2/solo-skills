@@ -147,7 +147,7 @@ C(자료 카드)는 HTML/CSS 렌더링으로 직접 만든다. 겟백 브랜드 
 
 ### 웹에서 근거 이미지 조달 (경로 검증 완료)
 
-`imageSearch` 전역은 구글 봇 차단(`bot challenge HTML`)에 자주 막힌다. **브라우저로 직접 뚫는다.**
+`imageSearch` 전역은 구글 봇 차단(`bot challenge HTML`)에 자주 막힌다. **막히면 브라우저에서 직접 검색한다.**
 
 ```js
 const gi = await openTab('https://www.google.com/search?udm=2&q=' + encodeURIComponent(query));
@@ -166,7 +166,7 @@ const cand = await gi.evaluate((mw)=>{
   return out;
 }, 450);
 
-// 페이지 컨텍스트에서 fetch해야 CDN 차단을 안 먹는다
+// 페이지 컨텍스트에서 fetch해야 이미지가 정상으로 받아진다
 const bin = await gi.evaluate(async u=>{
   const r = await fetch(u); const b = await r.arrayBuffer();
   return Array.from(new Uint8Array(b)).map(x=>String.fromCharCode(x)).join('');
